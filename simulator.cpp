@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
     prog_ops::options_description desc{"Options"};
     desc.add_options()
 	    ("help,h", "Help")
-	    // ("a"     , "Associativity")
-	    // ("f"     , prog_ops::value<int>(), "<tracefile>")
+	    ("a"     , "Associativity")
+	    ("f"     , prog_ops::value<int>(), "<tracefile>")
 	    ("cs"    , prog_ops::value<int>(&cache_size)->default_value(1), "Cache Size")
 	    ("bs"    , prog_ops::value<int>(&block_size)->default_value(1), "Block Size")
 	    ("wp"    , prog_ops::value<int>(&wp)->default_value(1), "Write Policy {Write-Through = 1, Write-Back = 2}")
@@ -80,6 +80,8 @@ int main(int argc, char *argv[])
 	    std::cerr << "&!&" << ex.what() << '\n';
 	    return 1;
 	}
+
+	num_of_blocks = cache_size/block_size;
 
 	return 0;
 
