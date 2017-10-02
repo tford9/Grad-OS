@@ -1,14 +1,22 @@
 CC=clang++
-FLAGS=-std=c++11
-# INCS=-I/usr/local/Cellar/boost/1.64.0_1
-# LOCS=-L/usr/local/Cellar/boost/1.64.0_1/lib
-LIBS=-lboost_program_options
+FLAGS=-std=c++11 -Wall -v
+INCS=-I/usr/local/Cellar/boost/1.65.1 -I/usr/local/include
+# LOCS=-L/usr/local/Cellar/boost/1.65.1/lib
+LIBS=/usr/local/Cellar/boost/1.65.1/lib/libboost_program_options.a
 
-sim : simulator.cpp
-	$(CC) $(FLAGS) simulator.cpp -o sim $(LIBS)
+# SOURCES=
+# OBJECTS=$(SOURCES:.cpp=.o)
 
-utilties : utilties.cpp
-	$(CC) $(FLAGS) -o utilties utilties.cpp
+EXE=sim
+
+all: simulator.o
+	$(CC) $(FLAGS) $(INCS) $(LIBS) simulator.o -o $(EXE)
+
+simulator.o : simulator.cpp utilities.o
+	$(CC) $(FLAGS) -c simulator.cpp
+
+utilities.o : utilities.cpp utilities.hpp
+	$(CC) $(FLAGS) -c utilities.cpp utilities.hpp
 
 clean: 
-	rm -f sim 
+	rm *.o sim 
