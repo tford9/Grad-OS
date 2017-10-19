@@ -47,6 +47,8 @@ class GraphData
 		
 		//read graph data from file, store in *consecutive* memory
 		//memory needs to be consecutive or cache sim will not work!
+		//also needs to call cache->allocatePages once graph data
+		//is stored to init page divisions
 		virtual void loadFromFile(string filename) = 0;
 		
 		//given a node identifier, returns the next neighbor of this node
