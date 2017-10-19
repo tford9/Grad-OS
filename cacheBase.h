@@ -14,6 +14,7 @@ class Cache
 		map<unsigned long, int> pageBoundary;	//key - starting address of page
 													//value - page number
 		set<int> table;		//set of pages in cache
+		int limit;			//number of pages that will fit in cache
 		
 		//given a page table hit, update any necessary metadata (only override if necessary)
 		//note that the base class already tallies the hit, so this is just for tracking
@@ -24,11 +25,9 @@ class Cache
 		//to cache replacement policy (must override this function)
 		virtual void updateMiss(int page) = 0;
 		
-	public:
-		Cache() {};
-	
+	public:	
 		Cache(int cacheSize, int pageSize) 
-			: size(cacheSize), page(pageSize), hit(0), miss(0) { };
+			: size(cacheSize), page(pageSize), hit(0), miss(0), limit(cacheSize/pageSize) { };
 		
 		//given a range of addresses (and assuming they are contiguous), allocate
 		//the page boundaries
