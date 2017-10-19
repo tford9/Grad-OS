@@ -1,22 +1,17 @@
-CC=clang++
-FLAGS=-std=c++11 -Wall -v
-INCS=-I/usr/local/Cellar/boost/1.65.1 -I/usr/local/include
-# LOCS=-L/usr/local/Cellar/boost/1.65.1/lib
-LIBS=/usr/local/Cellar/boost/1.65.1/lib/libboost_program_options.a
-
-# SOURCES=
-# OBJECTS=$(SOURCES:.cpp=.o)
-
-EXE=sim
-
-all: simulator.o
-	$(CC) $(FLAGS) $(INCS) $(LIBS) simulator.o -o $(EXE)
-
-simulator.o : simulator.cpp utilities.o
-	$(CC) $(FLAGS) -c simulator.cpp
-
-utilities.o : utilities.cpp utilities.hpp
-	$(CC) $(FLAGS) -c utilities.cpp utilities.hpp
-
+CFLAGS = -O 
+CC = g++ 
+sim: sim.o utils.o travBase.o cacheBase.o graphBase.o
+	$(CC) $(CFLAGS) -o sim sim.o utils.o travBase.o cacheBase.o graphBase.o
+	
+sim.o: sim.cpp 
+	$(CC) $(CFLAGS) -c sim.cpp 
+travBase.o: travBase.h
+	$(CC) $(CFLAGS) -c travBase.h travBase.cpp 
+graphBase.o: graphBase.h graphBase.cpp
+	$(CC) $(CFLAGS) -c graphBase.cpp 
+cacheBase.o: cacheBase.h cacheBase.cpp
+	$(CC) $(CFLAGS) -c cacheBase.cpp
+utils.o: utils.cpp
+	$(CC) $(CFLAGS) -c utils.cpp
 clean: 
-	rm *.o sim 
+	rm -f core *.o 
