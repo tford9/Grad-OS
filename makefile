@@ -14,4 +14,4 @@ cacheBase.o: cacheBase.h cacheBase.cpp
 utils.o: utils.cpp
 	$(CC) $(CFLAGS) -c utils.cpp
 clean: 
-	rm -f core *.o 
+	rm -f core *.o *.gcf 
