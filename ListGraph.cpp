@@ -82,7 +82,32 @@ bool ListGraph::loadFromFile(string filename)
 }
 
 //given a node identifier, returns the next neighbor of this node
+//returns -1 if there are no more neighbors left
 int ListGraph::getNextNeighbor(int id)
 {
-	return 0;
+	int idx;		//index of neighbor to return
+	
+	//check if alreay at the end of this node's neighbors
+	if (lastNeighbor.find(id) != lastNeighbor.end() && lastNeighbor[id] == -1)
+		return -1;		//reached end previously, return -1	
+
+	//find index of next neighbor to return
+	//have returned neighbor before
+	if (lastNeighbor.find(id) != lastNeighbor.end())
+		idx = lastNeighbor[id] + 1;
+	//have not returned a neighbor - set it up
+	else
+		idx = index[id] + 1;	
+	
+	//double-check that we're not overstepping this node's neighbor list
+	if (idx > index.upper_bound(id)->second)
+	{
+		lastNeighbor[id] = -1;		//set value so we know for next time
+		return -1;		//no more neighbors, return -1
+	}
+	
+	//have a valid index, update the tracking data before returning
+	lastNeighbor[id] = idx;		//lastNeighbor for next time is the current one now
+
+	return getItem(idx);
 }

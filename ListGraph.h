@@ -11,6 +11,10 @@ class ListGraph : public GraphData
 	private:			
 		map<int, int> index;	//key = node number
 								//value = index of that node in graph vector
+								
+		map<int, int> lastNeighbor;		//key = node number
+										//value = index of last node given as neighbor
+										//		(where index is vector index)
 		
 	public:		
 		ListGraph();
