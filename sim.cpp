@@ -11,6 +11,7 @@
 
 //module includes
 #include "ListGraph.h"
+#include "MatrixGraph.h"
 
 using namespace std;
 
@@ -29,8 +30,6 @@ int main()
 	Traverse *trav;
 	GraphData *graph;
 	Cache *cache;
-	
-	int temp;
 
 	//get cache parameters
 	cout << "Enter cache size in KB: ";
@@ -90,10 +89,8 @@ int main()
 	//graph data layer
 	if (graphData == LIST)
 		graph = new ListGraph(cache);
-	/*
 	else if (graphData == MAT)
-		graph = &(new MatrixGraph(cache));
-	*/
+		graph = new MatrixGraph(cache);
 	if (graph->loadFromFile(filename) == false)
 		return 0;
 	
@@ -104,6 +101,8 @@ int main()
 	else if (alg == DFS)
 		trav = &(new DFStrav(graph));
 	*/
+	
+	return 0;
 	
 	//run the simulator!
 	trav->runTraversal(source);
