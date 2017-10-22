@@ -33,7 +33,7 @@ class GraphData
 		//different depending on storage schema being used
 		//ideally, all data accesses will be through this method, so you only
 		//have to trigger a cache lookup in one place
-		virtual int getItem(int row, int col) = 0;
+		int getItem(int index);
 		
 		//convert address of item to unsigned long for query to cache
 		unsigned long address(int *val);

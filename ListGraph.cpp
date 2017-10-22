@@ -8,15 +8,6 @@
 
 ListGraph::ListGraph() { }
 ListGraph::ListGraph(Cache *cachePtr) : GraphData(cachePtr) { }	
-
-//get item at [row][col] from 1D vector being used as 2D (dynamic) array
-//different depending on storage schema being used
-//ideally, all data accesses will be through this method, so you only
-//have to trigger a cache lookup in one place
-int ListGraph::getItem(int row, int col)
-{
-	return 0;
-}
 			
 //read graph data from file, store in *consecutive* memory
 //memory needs to be consecutive or cache sim will not work!
@@ -69,8 +60,7 @@ bool ListGraph::loadFromFile(string filename)
 			graph[i] = *tt;
 			i++;
 		}
-	}
-	
+	}	
 	
 	//DEBUG: print the vector to make sure it's right
 	/*

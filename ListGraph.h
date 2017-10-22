@@ -11,12 +11,6 @@ class ListGraph : public GraphData
 	private:			
 		map<int, int> index;	//key = node number
 								//value = index of that node in graph vector
-	
-		//get item at [row][col] from 1D vector being used as 2D (dynamic) array
-		//different depending on storage schema being used
-		//ideally, all data accesses will be through this method, so you only
-		//have to trigger a cache lookup in one place
-		virtual int getItem(int row, int col);
 		
 	public:		
 		ListGraph();
