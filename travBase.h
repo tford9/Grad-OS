@@ -7,9 +7,9 @@ using namespace std;
 class Traverse
 {
 	protected:
-		vector<bool> visited;	//mark nodes as visited (assume nodes numbered 0 to n-1)
-		int n;					//number of nodes
+		vector<bool> visited;	//mark nodes as visited (assume nodes numbered 0 to n-1)		
 		GraphData *graph;		//pointer to graph layer
+		int n;					//number of nodes
 		
 	public:
 		Traverse() {};
