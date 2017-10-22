@@ -6,7 +6,7 @@ using namespace std;
 
 class Traverse
 {
-	private:
+	protected:
 		vector<bool> visited;	//mark nodes as visited (assume nodes numbered 0 to n-1)
 		int n;					//number of nodes
 		GraphData *graph;		//pointer to graph layer

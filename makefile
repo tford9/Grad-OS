@@ -2,7 +2,7 @@ CFLAGS=-std=c++11 -Wall -v -O
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
-DERIVEDCLASSOBJS=cacheReplacementPolicy.o 
+DERIVEDCLASSOBJS=cacheReplacementPolicy.o traversals.o
 
 ########## Base Class Objects ###########
 sim: sim.o utils.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
@@ -22,6 +22,8 @@ cacheBase.o: cacheBase.h cacheBase.cpp
 cacheReplacementPolicy.o: cacheReplacementPolicy.h cacheReplacementPolicy.cpp
 	$(CC) $(CFLAGS) -c cacheReplacementPolicy.cpp cacheReplacementPolicy.h
 
+traversals.o: traversals.h 
+	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
 ########## Utilities ###########
 utils.o: utils.cpp
 	$(CC) $(CFLAGS) -c utils.cpp
