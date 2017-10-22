@@ -13,15 +13,15 @@ private:
 	std::vector<int> FIFOQueue;
 };
 
-void updateMiss(int page) {
+void RoundRobinPolicy::updateMiss(int page) {
 	// If the queue/table is full
 	if (FIFOQueue.size() == Cache::limit) {
 		// Evict the head of the queue 
-		Cache::table.erase(FIFOQueue.pop_back());
+		Cache::table.erase(FIFOQueue.back());
+		FIFOQueue.pop_back();
 	}
-
 	// Insert new page at back of queue
-	FIFOQueue.insert(page);
+	FIFOQueue.insert(FIFOQueue.begin(), page);
 	// Insert page into page table
 	Cache::table.insert(page);
 }
