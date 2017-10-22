@@ -24,7 +24,7 @@ int ListGraph::getItem(int row, int col)
 //is stored to init page divisions
 
 //input file assumptions: list of edges, one per line
-//nodes numbered 0 to n-1, but we don't know n yet
+//nodes numbered however they want, but we don't know how many yet
 //edges are directed, so if you want it both ways you have to list
 //both in the input file
 bool ListGraph::loadFromFile(string filename)
@@ -71,16 +71,22 @@ bool ListGraph::loadFromFile(string filename)
 		}
 	}
 	
-	/*
+	
 	//DEBUG: print the vector to make sure it's right
+	/*
 	cout << "vector: ";
 	for (int i = 0; i < (int)graph.size(); i++)
 		cout << graph[i] << " ";
-	cout << endl << "indexes: ";
+	cout << " (size " << graph.size() << ")" << endl << "indexes: ";
 	for (auto it = index.begin(); it != index.end(); it++)
 		cout << it->first << "->" << it->second << " ";
 	cout << endl;
 	*/
+	
+	//signal cache to allocate pages
+	unsigned long start = address(&graph[0]);
+	unsigned long end = start + sizeof(int) * graph.size();
+	cache->allocatePages(start, end);
 	
 	return true;
 }

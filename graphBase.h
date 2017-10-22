@@ -20,16 +20,6 @@ using namespace std;
 
 class GraphData
 {
-	private:			
-		//get item at [row][col] from 1D vector being used as 2D (dynamic) array
-		//different depending on storage schema being used
-		//ideally, all data accesses will be through this method, so you only
-		//have to trigger a cache lookup in one place
-		virtual int getItem(int row, int col) = 0;
-		
-		//convert address of item to unsigned long for query to cache
-		unsigned long address(int *val);
-		
 	protected:
 		vector<int> graph;	//graph data stored as one big vector,
 							//regardless of actual storage schema
@@ -38,6 +28,15 @@ class GraphData
 											//value - INDEX of next neighbor (not node id!)			
 		
 		Cache *cache;		//pointer to cache layer
+		
+		//get item at [row][col] from 1D vector being used as 2D (dynamic) array
+		//different depending on storage schema being used
+		//ideally, all data accesses will be through this method, so you only
+		//have to trigger a cache lookup in one place
+		virtual int getItem(int row, int col) = 0;
+		
+		//convert address of item to unsigned long for query to cache
+		unsigned long address(int *val);
 		
 	public:
 		int n;		//number of nodes		
