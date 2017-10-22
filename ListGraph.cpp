@@ -71,10 +71,16 @@ bool ListGraph::loadFromFile(string filename)
 		}
 	}
 	
+	/*
 	//DEBUG: print the vector to make sure it's right
+	cout << "vector: ";
 	for (int i = 0; i < (int)graph.size(); i++)
 		cout << graph[i] << " ";
+	cout << endl << "indexes: ";
+	for (auto it = index.begin(); it != index.end(); it++)
+		cout << it->first << "->" << it->second << " ";
 	cout << endl;
+	*/
 	
 	return true;
 }
