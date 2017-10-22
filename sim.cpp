@@ -87,7 +87,8 @@ int main()
 		graph = &(new ListGraph(cache));
 	else if (graphData == MAT)
 		graph = &(new MatrixGraph(cache));
-	graph->loadFromFile(filename);
+	if (graph->loadFromFile(filename) == false)
+		return 0;
 	
 	//traversal layer
 	if (alg == BFS)
