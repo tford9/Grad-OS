@@ -1,3 +1,5 @@
+#ifndef CACHE_REPLACEMENT_POLICIES
+#define CACHE_REPLACEMENT_POLICIES
 
 #include "cacheBase.h"
 #include <vector> 
@@ -25,3 +27,5 @@ void RoundRobinPolicy::updateMiss(int page) {
 	// Insert page into page table
 	Cache::table.insert(page);
 }
+
+#endif
