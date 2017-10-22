@@ -21,6 +21,8 @@ cacheBase.o: cacheBase.h cacheBase.cpp
 ########## Derived Class Objects ###########
 cacheReplacementPolicy.o: cacheReplacementPolicy.h cacheReplacementPolicy.cpp
 	$(CC) $(CFLAGS) -c cacheReplacementPolicy.cpp cacheReplacementPolicy.h
+ListGraph.o: ListGraph.h ListGraph.cpp
+	$(CC) $(CFLAGS) -c ListGraph.cpp ListGraph.h
 
 traversals.o: traversals.h 
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
