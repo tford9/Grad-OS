@@ -1,8 +1,8 @@
-CFLAGS=-std=c++11 -Wall -v -O
+CFLAGS=-std=c++11 -Wall -O
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
-DERIVEDCLASSOBJS=cacheReplacementPolicy.o traversals.o
+DERIVEDCLASSOBJS=cacheReplacementPolicy.o traversals.o ListGraph.o
 
 ########## Base Class Objects ###########
 sim: sim.o utils.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
@@ -14,16 +14,15 @@ sim.o: sim.cpp
 travBase.o: travBase.h
 	$(CC) $(CFLAGS) -c travBase.h travBase.cpp 
 graphBase.o: graphBase.h graphBase.cpp
-	$(CC) $(CFLAGS) -c graphBase.cpp 
+	$(CC) $(CFLAGS) -c graphBase.cpp graphBase.h
 cacheBase.o: cacheBase.h cacheBase.cpp
-	$(CC) $(CFLAGS) -c cacheBase.cpp
+	$(CC) $(CFLAGS) -c cacheBase.cpp cacheBase.h
 
 ########## Derived Class Objects ###########
 cacheReplacementPolicy.o: cacheReplacementPolicy.h cacheReplacementPolicy.cpp
 	$(CC) $(CFLAGS) -c cacheReplacementPolicy.cpp cacheReplacementPolicy.h
 ListGraph.o: ListGraph.h ListGraph.cpp
 	$(CC) $(CFLAGS) -c ListGraph.cpp ListGraph.h
-
 traversals.o: traversals.h 
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
 ########## Utilities ###########

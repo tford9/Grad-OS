@@ -4,10 +4,14 @@
 
 #include "utils.cpp"
 
-//module includes
+//base class includes
 #include "travBase.h"
 #include "graphBase.h"
 #include "cacheBase.h"
+
+//module includes
+#include "ListGraph.h"
+
 using namespace std;
 
 int main()
@@ -81,15 +85,19 @@ int main()
 		cache = &(new FIFOcache(cacheSize, pageSize));
 	else if (policy == RR)
 		cache = &(new RRcache(cacheSize, pageSize));
-		
+	*/
+	
 	//graph data layer
 	if (graphData == LIST)
-		graph = &(new ListGraph(cache));
+		graph = new ListGraph(cache);
+	/*
 	else if (graphData == MAT)
 		graph = &(new MatrixGraph(cache));
+	*/
 	if (graph->loadFromFile(filename) == false)
 		return 0;
 	
+	/*
 	//traversal layer
 	if (alg == BFS)
 		trav = &(new BFStrav(graph));

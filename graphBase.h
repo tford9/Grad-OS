@@ -35,16 +35,15 @@ class GraphData
 							//regardless of actual storage schema
 	
 		map<int, int> nextNeighbor;	//key - node number
-											//value - INDEX of next neighbor (not node id!)
-											
+											//value - INDEX of next neighbor (not node id!)			
+		
 		Cache *cache;		//pointer to cache layer
 		
 	public:
 		int n;		//number of nodes		
 	
-		GraphData() {};
-	
-		GraphData(Cache *cache);
+		GraphData();	
+		GraphData(Cache *cachePtr);
 		
 		//read graph data from file, store in *consecutive* memory
 		//memory needs to be consecutive or cache sim will not work!

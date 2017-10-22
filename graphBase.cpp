@@ -1,7 +1,9 @@
 #include "graphBase.h"
 #include "cacheBase.h"
 
-GraphData::GraphData(Cache *cachePtr) : cache(cachePtr) { };	
+GraphData::GraphData() { }
+
+GraphData::GraphData(Cache *cachePtr) : cache(cachePtr) { }	
 	
 unsigned long GraphData::address(int *val)
 {
