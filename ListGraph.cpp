@@ -30,18 +30,7 @@ bool ListGraph::loadFromFile(string filename)
 	
 	//some temporary variables
 	map<int, set<int> > data;
-	int a, b;
-	int edgeCount = 0;
-	
-	//read edges and store in map, will convert to contiguous vector later
-	while (fin >> a)
-	{
-		fin >> b;
-		edgeCount++;
-		
-		//add edge to map
-		data[a].insert(b);
-	}
+	int edgeCount = readGraphData(fin, data);		//read actual file data
 	
 	//extract node count
 	n = data.size();

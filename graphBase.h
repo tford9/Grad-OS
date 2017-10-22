@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <set>
+#include <fstream>
 using namespace std;
 
 // we're going to make a couple of key assumptions here:
@@ -25,7 +27,7 @@ class GraphData
 							//regardless of actual storage schema
 	
 		map<int, int> nextNeighbor;	//key - node number
-											//value - INDEX of next neighbor (not node id!)			
+									//value - INDEX of next neighbor (not node id!)			
 		
 		Cache *cache;		//pointer to cache layer
 		
@@ -37,6 +39,11 @@ class GraphData
 		
 		//convert address of item to unsigned long for query to cache
 		unsigned long address(int *val);
+		
+		//reads graph data from a file and stores into temporary map
+		//for later conversion to contiguous vector
+		//returns number of edges in graph
+		int readGraphData(ifstream &fin, map<int, set<int> > &data);
 		
 	public:
 		int n;		//number of nodes		
