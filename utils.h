@@ -1,7 +1,7 @@
 #ifndef UTILS
 #define UTILS
 
-#define DEBUG true
+#define DEBUG false
 
 enum TraversalAlgorithms { BFS = 1, DFS = 2 };
 enum ReplacementPolicies { LRU = 1, FIFO = 2, RR = 3 };

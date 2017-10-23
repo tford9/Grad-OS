@@ -101,5 +101,26 @@ int main()
 	
 	//run the simulator!
 	trav->runTraversal(source);
+	
+	//print final results for parsing/analysis
+	if (!DEBUG)
+	{
+		cout << cacheSize / 1024 << " " << pageSize / 1024 << " ";
+		//cache layer
+		if (policy == LRU) cout << "LRU";
+		else if (policy == FIFO) cout << "FIFO";
+		else cout << "RR";
+		cout << " ";
+		//graph data layer
+		if (graphData == LIST) cout << "LIST";
+		else cout << "MAT";
+		cout << " ";
+		//traversal layer
+		if (alg == BFS) cout << "BFS";
+		else cout << "DFS";
+		cout << " " << filename << " ";
+		//the cache will finish printing results
+	}
+	
 	cache->printResults();
 }

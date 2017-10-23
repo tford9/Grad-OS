@@ -57,6 +57,8 @@ void Cache::printResults()
 		cerr << hit << " hits" << endl;
 		cerr << miss << " misses" << endl;
 	}
+	else
+		cout << hit << " " << miss << endl;
 }
 
 //given a page table hit, update any necessary metadata (only override if necessary)
