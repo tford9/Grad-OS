@@ -1,5 +1,5 @@
-#ifndef CACHE_REPLACEMENT_POLICIES
-#define CACHE_REPLACEMENT_POLICIES
+#ifndef FIFO_CACHE
+#define FIFO_CACHE
 
 #include <vector>
 
