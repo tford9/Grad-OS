@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "utils.cpp"
+#include "utils.h"
 
 //base class includes
 #include "travBase.h"
@@ -91,8 +91,7 @@ int main()
 	else //if (graphData == MAT)	//use an else to prevent initialization warnings
 		graph = new MatrixGraph(cache);
 	if (graph->loadFromFile(filename) == false)
-		return 0;
-	
+		return 0;	
 	
 	//traversal layer	
 	if (alg == BFS)

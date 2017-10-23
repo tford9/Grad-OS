@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "utils.h"
 #include "ListGraph.h"
 #include "cacheBase.h"
 
@@ -53,15 +54,16 @@ bool ListGraph::loadFromFile(string filename)
 	}	
 	
 	//DEBUG: print the vector to make sure it's right
-	/*
-	cout << "vector: ";
-	for (int i = 0; i < (int)graph.size(); i++)
-		cout << graph[i] << " ";
-	cout << " (size " << graph.size() << ")" << endl << "indexes: ";
-	for (auto it = index.begin(); it != index.end(); it++)
-		cout << it->first << "->" << it->second << " ";
-	cout << endl;
-	*/
+	if (DEBUG)
+	{
+		cerr << "vector: ";
+		for (int i = 0; i < (int)graph.size(); i++)
+			cerr << graph[i] << " ";
+		cerr << " (size " << graph.size() << ")" << endl << "indexes: ";
+		for (auto it = index.begin(); it != index.end(); it++)
+			cerr << it->first << "->" << it->second << " ";
+		cerr << endl;
+	}
 	
 	//signal cache to allocate pages
 	unsigned long start = address(&graph[0]);

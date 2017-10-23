@@ -2,6 +2,7 @@
 #include <set>
 #include <iostream>
 
+#include "utils.h"
 #include "cacheBase.h"
 
 using namespace std;
@@ -49,11 +50,13 @@ void Cache::lookup(unsigned long address)
 //print results of cache sim
 void Cache::printResults()
 {
-	cout << "Simulator Results" << endl;
-	cout << hit + miss << " table lookups" << endl;
-	cout << hit << " hits" << endl;
-	cout << miss << " misses" << endl;
-	
+	if (DEBUG)
+	{
+		cerr << "Simulator Results" << endl;
+		cerr << hit + miss << " table lookups" << endl;
+		cerr << hit << " hits" << endl;
+		cerr << miss << " misses" << endl;
+	}
 }
 
 //given a page table hit, update any necessary metadata (only override if necessary)

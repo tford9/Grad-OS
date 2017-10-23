@@ -30,8 +30,8 @@ MatrixGraph.o: MatrixGraph.h MatrixGraph.cpp
 traversals.o: traversals.h traversals.cpp
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
 ########## Utilities ###########
-utils.o: utils.cpp
-	$(CC) $(CFLAGS) -c utils.cpp
+utils.o: utils.h
+	$(CC) $(CFLAGS) -c utils.h
 
 ########## Housekeeping ###########
 clean: 

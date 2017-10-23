@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 
+#include "utils.h"
 #include "MatrixGraph.h"
 #include "cacheBase.h"
 
@@ -49,15 +50,16 @@ bool MatrixGraph::loadFromFile(string filename)
 	}	
 	
 	//DEBUG: print the vector to make sure it's right
-	/*
-	cout << "vector: ";
-	for (int i = 0; i < (int)graph.size(); i++)
+	if (DEBUG)
 	{
-		if (i % n == 0) cout << endl;
-		cout << graph[i] << " ";
+		cerr << "vector: ";
+		for (int i = 0; i < (int)graph.size(); i++)
+		{
+			if (i % n == 0) cout << endl;
+			cerr << graph[i] << " ";
+		}
+		cerr << " (size " << graph.size() << ")" << endl;
 	}
-	cout << " (size " << graph.size() << ")" << endl;
-	*/
 	
 	//signal cache to allocate pages
 	unsigned long start = address(&graph[0]);
