@@ -2,4 +2,7 @@
 #include "graphBase.h"
 using namespace std;
 
-Traverse::Traverse(GraphData *graphPtr) : graph(graphPtr), n(graph->n) {};
+Traverse::Traverse(GraphData *graphPtr) : graph(graphPtr), n(graph->n) 
+{
+	visited.resize(n, false);
+};

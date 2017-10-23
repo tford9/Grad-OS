@@ -2,7 +2,7 @@ CFLAGS=-std=c++11 -Wall -O -g
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
-DERIVEDCLASSOBJS=cacheReplacementPolicy.o traversals.o ListGraph.o MatrixGraph.o
+DERIVEDCLASSOBJS=FIFOcache.o traversals.o ListGraph.o MatrixGraph.o
 
 ########## Base Class Objects ###########
 sim: sim.o utils.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
@@ -19,13 +19,13 @@ cacheBase.o: cacheBase.h cacheBase.cpp
 	$(CC) $(CFLAGS) -c cacheBase.cpp cacheBase.h
 
 ########## Derived Class Objects ###########
-cacheReplacementPolicy.o: cacheReplacementPolicy.h cacheReplacementPolicy.cpp
-	$(CC) $(CFLAGS) -c cacheReplacementPolicy.cpp cacheReplacementPolicy.h
+FIFOcache.o: FIFOcache.h FIFOcache.cpp
+	$(CC) $(CFLAGS) -c FIFOcache.cpp FIFOcache.h
 ListGraph.o: ListGraph.h ListGraph.cpp
 	$(CC) $(CFLAGS) -c ListGraph.cpp ListGraph.h
 MatrixGraph.o: MatrixGraph.h MatrixGraph.cpp
 	$(CC) $(CFLAGS) -c MatrixGraph.cpp MatrixGraph.h
-traversals.o: traversals.h 
+traversals.o: traversals.h traversals.cpp
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
 ########## Utilities ###########
 utils.o: utils.cpp
