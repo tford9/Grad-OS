@@ -5,8 +5,8 @@ BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
 DERIVEDCLASSOBJS=FIFOcache.o RRcache.o traversals.o ListGraph.o MatrixGraph.o
 
 ########## Base Class Objects ###########
-sim: sim.o utils.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
-	$(CC) $(CFLAGS) -o sim sim.o utils.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
+sim: sim.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
+	$(CC) $(CFLAGS) -o sim sim.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
 sim.o: sim.cpp 
 	$(CC) $(CFLAGS) -c sim.cpp 
 
@@ -29,9 +29,6 @@ MatrixGraph.o: MatrixGraph.h MatrixGraph.cpp
 	$(CC) $(CFLAGS) -c MatrixGraph.cpp MatrixGraph.h
 traversals.o: traversals.h traversals.cpp
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
-########## Utilities ###########
-utils.o: utils.h
-	$(CC) $(CFLAGS) -c utils.h
 
 ########## Housekeeping ###########
 clean: 
