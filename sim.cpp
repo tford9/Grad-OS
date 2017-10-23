@@ -14,6 +14,7 @@
 #include "MatrixGraph.h"
 #include "traversals.h"
 #include "FIFOcache.h"
+#include "RRcache.h"
 using namespace std;
 
 int main()
@@ -79,10 +80,10 @@ int main()
 	//cache layer
 	//if (policy == LRU)
 	//	cache = new LRUcache(cacheSize, pageSize);
-	//else if (policy == FIFO)							//only FIFO for now
+	if (policy == FIFO)							
 		cache = new FIFOcache(cacheSize, pageSize);
-	//else if (policy == RR)
-	//	cache = new RRcache(cacheSize, pageSize);
+	else //if (policy == RR)		//use an else to prevent initialization warnings
+		cache = new RRcache(cacheSize, pageSize);
 	
 	//graph data layer
 	if (graphData == LIST)
