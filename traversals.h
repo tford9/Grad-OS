@@ -12,6 +12,8 @@ class BFStrav : public Traverse
     private:
         queue<int> q;
     public:
+        BFStrav();
+        BFStrav(GraphData *graphPtr); 
         void runTraversal(int Source);
 };
 
@@ -21,50 +23,9 @@ class DFStrav : public Traverse
         stack<int> s;
 
     public:
+        DFStrav();
+        DFStrav(GraphData *graphPtr);
         void runTraversal(int Source);
 };
 
-void BFStrav::runTraversal(int source)
-{
-    q.push(source);
-    Traverse::visited[source] = true;
-    while (q.size() != 0)
-    {
-        int u = q.front();
-        q.pop();
-        while (true)
-        {
-            int v = Traverse::graph -> getNextNeighbor(u);
-            if (v == -1) // the sentinel value which indicates the end of neighbors
-                break;
-            if (not Traverse::visited[v])
-            {
-                Traverse::visited[v] = true;
-                q.push(v);
-            }
-        }
-    }
-}
-
-void DFStrav::runTraversal(int source)
-{
-    s.push(source);
-    Traverse::visited[source] = true;
-    while (s.size() != 0)
-    {
-        int u = s.top();
-        s.pop();
-        while (true)
-        {
-            int v = Traverse::graph -> getNextNeighbor(u);
-            if (v == -1) // the sentinel value which indicates the end of neighbors
-                break;
-            if (not Traverse::visited[v])
-            {
-                Traverse::visited[v] = true;
-                s.push(v);
-            }
-        }
-    }
-}
 #endif

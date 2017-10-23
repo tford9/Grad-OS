@@ -1,4 +1,4 @@
-CFLAGS=-std=c++11 -Wall -O
+CFLAGS=-std=c++11 -Wall -O -g
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
@@ -11,7 +11,7 @@ sim.o: sim.cpp
 	$(CC) $(CFLAGS) -c sim.cpp 
 
 ########## Base Class Objects ###########
-travBase.o: travBase.h
+travBase.o: travBase.h travBase.cpp
 	$(CC) $(CFLAGS) -c travBase.h travBase.cpp 
 graphBase.o: graphBase.h graphBase.cpp
 	$(CC) $(CFLAGS) -c graphBase.cpp graphBase.h

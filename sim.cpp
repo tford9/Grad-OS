@@ -12,7 +12,7 @@
 //module includes
 #include "ListGraph.h"
 #include "MatrixGraph.h"
-
+#include "traversals.h"
 using namespace std;
 
 int main()
@@ -87,6 +87,7 @@ int main()
 	*/
 	
 	//graph data layer
+	cout << "Graph data: " << LIST << endl;
 	if (graphData == LIST)
 		graph = new ListGraph(cache);
 	else if (graphData == MAT)
@@ -94,13 +95,17 @@ int main()
 	if (graph->loadFromFile(filename) == false)
 		return 0;
 	
-	/*
+	
 	//traversal layer
+	// if (alg == BFS)
+	// 	trav = &(new BFStrav(graph));
+	// else if (alg == DFS)
+	// 	trav = &(new DFStrav(graph));
+	
 	if (alg == BFS)
-		trav = &(new BFStrav(graph));
+		trav = new BFStrav(graph);
 	else if (alg == DFS)
-		trav = &(new DFStrav(graph));
-	*/
+		trav = new DFStrav(graph);
 	
 	return 0;
 	
