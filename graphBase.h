@@ -1,12 +1,14 @@
 #ifndef GRAPH_BASE
 #define GRAPH_BASE
 
-#include "cacheBase.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <set>
 #include <fstream>
+
+#include "cacheBase.h"
+
 using namespace std;
 
 // we're going to make a couple of key assumptions here:

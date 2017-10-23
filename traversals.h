@@ -1,9 +1,10 @@
 #ifndef TRAVS
 #define TRAVS
 
-#include "travBase.h"
 #include <queue>
 #include <stack>
+
+#include "travBase.h"
 
 using namespace std;
 

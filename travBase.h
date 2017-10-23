@@ -2,6 +2,7 @@
 #define TRAV_BASE
 
 #include "graphBase.h"
+
 using namespace std;
 
 class Traverse

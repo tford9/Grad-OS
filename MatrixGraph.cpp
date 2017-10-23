@@ -1,10 +1,11 @@
-#include "MatrixGraph.h"
-#include "cacheBase.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <fstream>
 #include <iostream>
+
+#include "MatrixGraph.h"
+#include "cacheBase.h"
 
 MatrixGraph::MatrixGraph() { }
 MatrixGraph::MatrixGraph(Cache *cachePtr) : GraphData(cachePtr) { }	

@@ -1,9 +1,11 @@
 #ifndef MAT_GRAPH
 #define MAT_GRAPH
 
+#include <map>
+
 #include "graphBase.h"
 #include "cacheBase.h"
-#include <map>
+
 using namespace std;
 
 //assumes nodes numbered 0 to n-1, or things will go sideways

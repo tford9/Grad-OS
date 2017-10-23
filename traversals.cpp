@@ -1,7 +1,7 @@
-#include "traversals.h"
 #include <queue>
 #include <stack>
 
+#include "traversals.h"
 
 BFStrav::BFStrav() {}
 BFStrav::BFStrav(GraphData *graphPtr) : Traverse(graphPtr) {}

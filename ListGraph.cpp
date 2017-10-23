@@ -1,10 +1,11 @@
-#include "ListGraph.h"
-#include "cacheBase.h"
 #include <string>
 #include <vector>
 #include <map>
 #include <fstream>
 #include <iostream>
+
+#include "ListGraph.h"
+#include "cacheBase.h"
 
 ListGraph::ListGraph() { }
 ListGraph::ListGraph(Cache *cachePtr) : GraphData(cachePtr) { }	

@@ -1,8 +1,10 @@
 #ifndef CACHE_REPLACEMENT_POLICIES
 #define CACHE_REPLACEMENT_POLICIES
 
-#include "cacheBase.h"
 #include <vector>
+
+#include "cacheBase.h"
+
 using namespace std;
 
 class FIFOcache : public Cache 

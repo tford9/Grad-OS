@@ -1,9 +1,11 @@
 #ifndef LIST_GRAPH
 #define LIST_GRAPH
 
+#include <map>
+
 #include "graphBase.h"
 #include "cacheBase.h"
-#include <map>
+
 using namespace std;
 
 class ListGraph : public GraphData

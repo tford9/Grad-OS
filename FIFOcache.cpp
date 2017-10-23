@@ -1,6 +1,8 @@
+#include <vector>
+
 #include "cacheBase.h"
 #include "FIFOcache.h"
-#include <vector>
+
 using namespace std;
 
 FIFOcache::FIFOcache(int cacheSize, int pageSize) : Cache(cacheSize, pageSize) { }
