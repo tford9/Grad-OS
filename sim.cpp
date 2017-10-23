@@ -13,6 +13,7 @@
 #include "ListGraph.h"
 #include "MatrixGraph.h"
 #include "traversals.h"
+#include "FIFOcache.h"
 using namespace std;
 
 int main()
@@ -75,39 +76,28 @@ int main()
 	
 	//declare and initialize the layers from the bottom up
 	
-	//commented out for now, because none of the inherited classes exist yet
-	/*
 	//cache layer
-	if (policy == LRU)
-		cache = &(new LRUcache(cacheSize, pageSize));
-	else if (policy == FIFO)
-		cache = &(new FIFOcache(cacheSize, pageSize));
-	else if (policy == RR)
-		cache = &(new RRcache(cacheSize, pageSize));
-	*/
+	//if (policy == LRU)
+	//	cache = new LRUcache(cacheSize, pageSize);
+	//else if (policy == FIFO)							//only FIFO for now
+		cache = new FIFOcache(cacheSize, pageSize);
+	//else if (policy == RR)
+	//	cache = new RRcache(cacheSize, pageSize);
 	
 	//graph data layer
-	cout << "Graph data: " << LIST << endl;
 	if (graphData == LIST)
 		graph = new ListGraph(cache);
-	else if (graphData == MAT)
+	else //if (graphData == MAT)	//use an else to prevent initialization warnings
 		graph = new MatrixGraph(cache);
 	if (graph->loadFromFile(filename) == false)
 		return 0;
 	
 	
-	//traversal layer
-	// if (alg == BFS)
-	// 	trav = &(new BFStrav(graph));
-	// else if (alg == DFS)
-	// 	trav = &(new DFStrav(graph));
-	
+	//traversal layer	
 	if (alg == BFS)
 		trav = new BFStrav(graph);
-	else if (alg == DFS)
+	else //if (alg == DFS)		//use an else to prevent initialization warnings
 		trav = new DFStrav(graph);
-	
-	return 0;
 	
 	//run the simulator!
 	trav->runTraversal(source);
