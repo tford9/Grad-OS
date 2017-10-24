@@ -15,6 +15,7 @@
 #include "traversals.h"
 #include "FIFOcache.h"
 #include "RRcache.h"
+#include "LRUcache.h"
 using namespace std;
 
 int main()
@@ -78,9 +79,9 @@ int main()
 	//declare and initialize the layers from the bottom up
 	
 	//cache layer
-	//if (policy == LRU)
-	//	cache = new LRUcache(cacheSize, pageSize);
-	if (policy == FIFO)							
+	if (policy == LRU)
+		cache = new LRUcache(cacheSize, pageSize);
+	else if (policy == FIFO)							
 		cache = new FIFOcache(cacheSize, pageSize);
 	else //if (policy == RR)		//use an else to prevent initialization warnings
 		cache = new RRcache(cacheSize, pageSize);
@@ -102,7 +103,7 @@ int main()
 	//run the simulator!
 	trav->runTraversal(source);
 	
-	//print final results for parsing/analysis
+	//print final results for parsing/analysis (pretty print)
 	if (!DEBUG)
 	{
 		cout << cacheSize / 1024 << " " << pageSize / 1024 << " ";

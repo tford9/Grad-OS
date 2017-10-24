@@ -17,7 +17,7 @@ class LRUcache : public Cache
 		virtual void updateHit(int page);
 		
 	private:
-		// FIFOQueue contains FIFO queue
+		// LRUQueue contains LRU queue (using a vector for removes in the middle)
 		vector<int> LRUQueue;
 };
 
