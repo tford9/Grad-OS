@@ -7,7 +7,7 @@ g5, 4158, 26844
 g6, 33696, 361622
 g7, 75877, 811478
 g8, 317080, 2099732
-Get g9 and g10 from https://drive.google.com/open?id=0BxEehAOgaIIjRmR4VVduUUNQQ1E
+Get g9 and g10 from https://drive.google.com/file/d/0BxEehAOgaIIjRmR4VVduUUNQQ1E/view?usp=sharing
 g9, 654782, 13163742
 g10, 855802, 8582704
 
