@@ -35,42 +35,42 @@ int main()
 	Cache *cache;
 
 	//get cache parameters
-	cout << "Enter cache size in KB: ";
+	cerr << "Enter cache size in KB: ";
 	cin >> cacheSize;
 	cacheSize *= 1024;		//convert to bytes
 	
-	cout << "Enter page size in KB: ";
+	cerr << "Enter page size in KB: ";
 	cin >> pageSize;
 	pageSize *= 1024;
 	
 	//if page size does not evenly divide cache size, display a warning message
 	if (cacheSize % pageSize != 0)
-		cout << "Warning: page size does not evenly divide cache size" << endl;
+		cerr << "Warning: page size does not evenly divide cache size" << endl;
 		
 	//pick one (and only one) traversal algorithm
-	cout << endl << "Traversal Algorithms" << endl;
-	cout << BFS << " Breadth-first search" << endl;
-	cout << DFS << " Depth-first search" << endl;
-	cout << "Select one traversal algorithm: ";
+	cerr << endl << "Traversal Algorithms" << endl;
+	cerr << BFS << " Breadth-first search" << endl;
+	cerr << DFS << " Depth-first search" << endl;
+	cerr << "Select one traversal algorithm: ";
 	cin >> alg;
 	
 	//pick one, or both, graph data representations
-	cout << endl << "Graph Data Representations" << endl;
-	cout << "1 Adjacency List" << endl;
-	cout << "2 Adjacency Matrix" << endl;
-	cout << "Select graph data option: ";
+	cerr << endl << "Graph Data Representations" << endl;
+	cerr << "1 Adjacency List" << endl;
+	cerr << "2 Adjacency Matrix" << endl;
+	cerr << "Select graph data option: ";
 	cin >> graphData;
 	
 	//pick as many cache replacement policies as you want!
-	cout << endl << "Cache Replacement Policies" << endl;
-	cout << "1 LRU" << endl;
-	cout << "2 FIFO" << endl;
-	cout << "3 RR" << endl;
-	cout << "Select cache replacement policy: ";
+	cerr << endl << "Cache Replacement Policies" << endl;
+	cerr << "1 LRU" << endl;
+	cerr << "2 FIFO" << endl;
+	cerr << "3 RR" << endl;
+	cerr << "Select cache replacement policy: ";
 	cin >> policy;
 	
 	//enter filename containing graph data
-	cout << endl << "Enter filename for test graph data: ";
+	cerr << endl << "Enter filename for test graph data: ";
 	cin >> filename;
 	
 	//for now, let's set the source at 0
