@@ -3,6 +3,7 @@
 # Purpose: Automate simulator calls and record results.
 import numpy as np
 from subprocess import Popen, PIPE, STDOUT
+from sys import argv, exit  
 
 TravAlgs = [1,2];
 DatForms = [1,2];
@@ -12,7 +13,11 @@ CacheSizesKB = np.arange(8,13,2);
 
 print(CacheSizesKB)
 
-output_file = open('output.txt', 'w')
+if len(argv) < 2:
+    print('Specify graph name (g1 / g2 .. / g10) as argument. Exiting!')
+    exit(0) 
+
+output_file = open('output_{}.txt'.format(argv[1]), 'w')
 
 for cs in CacheSizesKB :
     string = "";
@@ -29,7 +34,7 @@ for cs in CacheSizesKB :
                 string3 = string2 + str(df) + '\n';
                 for rp in ReplPol:
                     string4="";
-                    string4 +=string3 + str(rp) + '\n' + "./edgelists/g2\n";
+                    string4 +=string3 + str(rp) + '\n' + "./edgelists/{}\n".format(argv[1]);
 
                     # p = Popen(['./sim', ''], stdout=PIPE, stdin=PIPE, stderr=PIPE) 
                     # sim_stdout, sim_stderr = p.communicate(input=bytes(string4, encoding='ascii'))
