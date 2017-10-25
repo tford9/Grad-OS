@@ -5,8 +5,8 @@
 from subprocess import Popen, PIPE, STDOUT
 
 TravAlgs = [1,2];
-ReplPol= [1,2,3];
 DatForms = [1,2];
+ReplPol= [1,2,3];
 
 CacheSizesKB = [8, 64, 128, 256, 512, 1024]
 PageSizesKB = [2,4,8,16,32,64]
@@ -29,10 +29,10 @@ for cs in CacheSizesKB :
                     string4="";
                     string4 +=string3 + str(rp) + '\n' + "./edgelists/g2\n";
 
-            p = Popen(['./sim', ''], stdout=PIPE, stdin=PIPE, stderr=PIPE) 
-            sim_stdout, sim_stderr = p.communicate(input=bytes(string4, encoding='ascii'))
-            output_file.write(sim_stdout.decode());
-            # print(string2);
+                    p = Popen(['./sim', ''], stdout=PIPE, stdin=PIPE, stderr=PIPE) 
+                    sim_stdout, sim_stderr = p.communicate(input=bytes(string4, encoding='ascii'))
+                    output_file.write(sim_stdout.decode());
+                    print(string4);
 
 
 
