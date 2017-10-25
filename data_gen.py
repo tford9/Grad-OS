@@ -6,10 +6,10 @@ from subprocess import Popen, PIPE, STDOUT
 from sys import argv, exit  
 
 TravAlgs = [1,2];
-DatForms = [1,2];
+DatForms = [1];
 ReplPol= [1,2,3];
 
-CacheSizesKB = np.arange(8,13,2);
+CacheSizesKB = np.arange(8,13,1);
 
 print(CacheSizesKB)
 
@@ -22,7 +22,7 @@ output_file = open('output_{}.txt'.format(argv[1]), 'w')
 for cs in CacheSizesKB :
     string = "";
     string += str(2**cs) + '\n';
-    PageSizesKB = np.arange(cs-7, cs-2,2);
+    PageSizesKB = np.arange(cs-7,cs-3);
     for ps in PageSizesKB:
         string1="";
         string1 +=string + str(2**ps) + '\n';
@@ -36,9 +36,9 @@ for cs in CacheSizesKB :
                     string4="";
                     string4 +=string3 + str(rp) + '\n' + "./edgelists/{}\n".format(argv[1]);
 
-                    # p = Popen(['./sim', ''], stdout=PIPE, stdin=PIPE, stderr=PIPE) 
-                    # sim_stdout, sim_stderr = p.communicate(input=bytes(string4, encoding='ascii'))
-                    # output_file.write(sim_stdout.decode());
+                    p = Popen(['./sim', ''], stdout=PIPE, stdin=PIPE, stderr=PIPE) 
+                    sim_stdout, sim_stderr = p.communicate(input=bytearray(string4))
+                    output_file.write(sim_stdout.decode());
                     print(string4);
 
 
