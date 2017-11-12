@@ -5,6 +5,6 @@
 
 enum TraversalAlgorithms { BFS = 1, DFS = 2 };
 enum ReplacementPolicies { LRU = 1, FIFO = 2, LFU = 3, RR = 4, OPT = 5 };
-enum GraphDataFormats { LIST = 1, MAT = 2 };
+enum GraphDataFormats { LIST = 1, MAT = 2, COMP_MAT = 3 };
 
 #endif

@@ -12,6 +12,7 @@
 //module includes
 #include "ListGraph.h"
 #include "MatrixGraph.h"
+#include "CompMatrixGraph.h"
 #include "traversals.h"
 #include "FIFOcache.h"
 #include "RRcache.h"
@@ -60,6 +61,7 @@ int main()
 	cerr << endl << "Graph Data Representations" << endl;
 	cerr << "1 Adjacency List" << endl;
 	cerr << "2 Adjacency Matrix" << endl;
+	cerr << "3 Compressed Adjacency Matrix" << endl;
 	cerr << "Select graph data option: ";
 	cin >> graphData;
 	
@@ -98,8 +100,10 @@ int main()
 	//graph data layer
 	if (graphData == LIST)
 		graph = new ListGraph(cache);
-	else //if (graphData == MAT)	//use an else to prevent initialization warnings
+	else if (graphData == MAT)	
 		graph = new MatrixGraph(cache);
+	else //if (graphData == COMP_MAT)   //use an else to prevent initialization warnings
+		graph = new CompMatrixGraph(cache);
 	if (graph->loadFromFile(filename) == false)
 		return 0;	
 	
@@ -125,7 +129,8 @@ int main()
 		cout << " ";
 		//graph data layer
 		if (graphData == LIST) cout << "LIST";
-		else cout << "MAT";
+		else if (graphData == MAT) cout << "MAT";
+		else cout << "COMP_MAT";
 		cout << " ";
 		//traversal layer
 		if (alg == BFS) cout << "BFS";

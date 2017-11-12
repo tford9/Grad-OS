@@ -2,7 +2,7 @@ CFLAGS=-std=c++11 -Wall -O -g
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
-DERIVEDCLASSOBJS=FIFOcache.o RRcache.o LRUcache.o LFUcache.o OPTcache.o traversals.o ListGraph.o MatrixGraph.o
+DERIVEDCLASSOBJS=FIFOcache.o RRcache.o LRUcache.o LFUcache.o OPTcache.o traversals.o ListGraph.o MatrixGraph.o CompMatrixGraph.o
 
 ########## Base Class Objects ###########
 sim: sim.o $(BASECLASSOBJS) $(DERIVEDCLASSOBJS)
@@ -33,6 +33,8 @@ ListGraph.o: ListGraph.h ListGraph.cpp
 	$(CC) $(CFLAGS) -c ListGraph.cpp ListGraph.h
 MatrixGraph.o: MatrixGraph.h MatrixGraph.cpp
 	$(CC) $(CFLAGS) -c MatrixGraph.cpp MatrixGraph.h
+CompMatrixGraph.o: CompMatrixGraph.h CompMatrixGraph.cpp
+	$(CC) $(CFLAGS) -c CompMatrixGraph.cpp CompMatrixGraph.h
 traversals.o: traversals.h traversals.cpp
 	$(CC) $(CFLAGS) -c traversals.cpp traversals.h
 
