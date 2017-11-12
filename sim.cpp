@@ -17,6 +17,7 @@
 #include "RRcache.h"
 #include "LRUcache.h"
 #include "LFUcache.h"
+#include "OPTcache.h"
 using namespace std;
 
 int main()
@@ -68,6 +69,7 @@ int main()
 	cerr << "2 FIFO" << endl;
 	cerr << "3 LFU" << endl;
 	cerr << "4 RR" << endl;
+	cerr << "5 OPT" << endl;
 	cerr << "Select cache replacement policy: ";
 	cin >> policy;
 	
@@ -87,8 +89,10 @@ int main()
 		cache = new FIFOcache(cacheSize, pageSize);
 	else if (policy == LFU)
 		cache = new LFUcache(cacheSize, pageSize);
-	else //if (policy == RR)		//use an else to prevent initialization warnings
+	else if (policy == RR)
 		cache = new RRcache(cacheSize, pageSize);
+	else //if policy == OPT)		//use an else to prevent initialization warnings
+		cache = new OPTcache(cacheSize, pageSize);
 
 	
 	//graph data layer
@@ -116,7 +120,8 @@ int main()
 		if (policy == LRU) cout << "LRU";
 		else if (policy == FIFO) cout << "FIFO";
 		else if (policy == LFU) cout << "LFU";
-		else cout << "RR";
+		else if (policy == RR) cout << "RR";
+		else cout << "OPT";
 		cout << " ";
 		//graph data layer
 		if (graphData == LIST) cout << "LIST";
@@ -127,6 +132,13 @@ int main()
 		else cout << "DFS";
 		cout << " " << filename << " ";
 		//the cache will finish printing results
+	}
+	
+	//special case for optimal cache: trigger a post-sim hit/miss computation
+	if (policy == OPT)
+	{
+		OPTcache *ocache = dynamic_cast<OPTcache*>(cache);	//ugly typecast
+		ocache->optimalSim();
 	}
 	
 	cache->printResults();
