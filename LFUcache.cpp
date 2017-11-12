@@ -20,7 +20,7 @@ void LFUcache::updateMiss(int page)
 		int min_count = LFUQueue.begin() -> second;
 		for (auto item: LFUQueue)
 		{
-			int page = item -> first, count = item -> second;
+			int page = item.first, count = item.second;
 			if (count == 1) // this is the min count, so just push it out
 			{
 				min_page = page;

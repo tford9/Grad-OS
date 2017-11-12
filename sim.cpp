@@ -16,6 +16,7 @@
 #include "FIFOcache.h"
 #include "RRcache.h"
 #include "LRUcache.h"
+#include "LFUcache.h"
 using namespace std;
 
 int main()
@@ -65,7 +66,8 @@ int main()
 	cerr << endl << "Cache Replacement Policies" << endl;
 	cerr << "1 LRU" << endl;
 	cerr << "2 FIFO" << endl;
-	cerr << "3 RR" << endl;
+	cerr << "3 LFU" << endl;
+	cerr << "4 RR" << endl;
 	cerr << "Select cache replacement policy: ";
 	cin >> policy;
 	
@@ -83,8 +85,11 @@ int main()
 		cache = new LRUcache(cacheSize, pageSize);
 	else if (policy == FIFO)							
 		cache = new FIFOcache(cacheSize, pageSize);
+	else if (policy == LFU)
+		cache = new LFUcache(cacheSize, pageSize);
 	else //if (policy == RR)		//use an else to prevent initialization warnings
 		cache = new RRcache(cacheSize, pageSize);
+
 	
 	//graph data layer
 	if (graphData == LIST)
@@ -110,6 +115,7 @@ int main()
 		//cache layer
 		if (policy == LRU) cout << "LRU";
 		else if (policy == FIFO) cout << "FIFO";
+		else if (policy == LFU) cout << "LFU";
 		else cout << "RR";
 		cout << " ";
 		//graph data layer
