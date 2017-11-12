@@ -27,9 +27,6 @@ class GraphData
 	protected:
 		vector<int> graph;	//graph data stored as one big vector,
 							//regardless of actual storage schema
-	
-		map<int, int> nextNeighbor;	//key - node number
-									//value - INDEX of next neighbor (not node id!)			
 		
 		Cache *cache;		//pointer to cache layer
 		
