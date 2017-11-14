@@ -61,6 +61,12 @@ void Cache::printResults()
 		cout << hit << " " << miss << endl;
 }
 
+void Cache::setCounts(int newHit, int newMiss)
+{
+	hit = newHit;
+	miss = newMiss;
+}
+
 //given a page table hit, update any necessary metadata (only override if necessary)
 //note that the base class already tallies the hit, so this is just for tracking
 //references to pages (ie, for LRU)

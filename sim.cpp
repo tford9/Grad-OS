@@ -12,6 +12,7 @@
 //module includes
 #include "ListGraph.h"
 #include "MatrixGraph.h"
+#include "CompMatrixGraph.h"
 #include "traversals.h"
 #include "FIFOcache.h"
 #include "RRcache.h"
@@ -20,6 +21,7 @@
 #include "MRUcache.h"
 #include "LIFOcache.h"
 
+#include "OPTcache.h"
 using namespace std;
 
 int main()
@@ -62,6 +64,7 @@ int main()
 	cerr << endl << "Graph Data Representations" << endl;
 	cerr << "1 Adjacency List" << endl;
 	cerr << "2 Adjacency Matrix" << endl;
+	cerr << "3 Compressed Adjacency Matrix" << endl;
 	cerr << "Select graph data option: ";
 	cin >> graphData;
 	
@@ -73,6 +76,7 @@ int main()
 	cerr << "4 RR" << endl;
 	cerr << "5 MRU" << endl;
 	cerr << "6 LIFO" << endl;
+	cerr << "7 OPT" << endl;
 	cerr << "Select cache replacement policy: ";
 	cin >> policy;
 	
@@ -96,15 +100,19 @@ int main()
 		cache = new MRUcache(cacheSize, pageSize);
 	else if (policy == LIFO)
 		cache = new LIFOcache(cacheSize, pageSize);
-	else //if (policy == RR)		//use an else to prevent initialization warnings
+	else if (policy == RR)
 		cache = new RRcache(cacheSize, pageSize);
+	else //if policy == OPT)		//use an else to prevent initialization warnings
+		cache = new OPTcache(cacheSize, pageSize);
 
 	
 	//graph data layer
 	if (graphData == LIST)
 		graph = new ListGraph(cache);
-	else //if (graphData == MAT)	//use an else to prevent initialization warnings
+	else if (graphData == MAT)	
 		graph = new MatrixGraph(cache);
+	else //if (graphData == COMP_MAT)   //use an else to prevent initialization warnings
+		graph = new CompMatrixGraph(cache);
 	if (graph->loadFromFile(filename) == false)
 		return 0;	
 	
@@ -127,17 +135,26 @@ int main()
 		else if (policy == LFU) cout << "LFU";
 		else if (policy == MRU) cout << "MRU";
 		else if (policy == LIFO) cout << "LIFO";
-		else cout << "RR";
+		else if (policy == RR) cout << "RR";
+		else cout << "OPT";
 		cout << " ";
 		//graph data layer
 		if (graphData == LIST) cout << "LIST";
-		else cout << "MAT";
+		else if (graphData == MAT) cout << "MAT";
+		else cout << "COMP_MAT";
 		cout << " ";
 		//traversal layer
 		if (alg == BFS) cout << "BFS";
 		else cout << "DFS";
 		cout << " " << filename << " ";
 		//the cache will finish printing results
+	}
+	
+	//special case for optimal cache: trigger a post-sim hit/miss computation
+	if (policy == OPT)
+	{
+		OPTcache *ocache = dynamic_cast<OPTcache*>(cache);	//ugly typecast
+		ocache->optimalSim();
 	}
 	
 	cache->printResults();

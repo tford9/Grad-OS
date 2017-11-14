@@ -26,6 +26,7 @@ class Cache
 	protected:
 		set<int> table;		//set of pages in cache
 		int limit;			//number of pages that will fit in cache
+		void setCounts(int newHit, int newMiss);	//setter for optimal cache
 	public:	
 		/* Base Class Constructor */ 
 		Cache(int cacheSize, int pageSize) 
