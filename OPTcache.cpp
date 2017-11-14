@@ -22,7 +22,7 @@ void OPTcache::updateMiss(int page)
 }
 
 void OPTcache::optimalSim()
-{
+{	
 	//declare some local counters (will send to base class at the end)
 	int hit = 0, miss = 0;
 	
@@ -32,12 +32,21 @@ void OPTcache::optimalSim()
 		//page already in table, log a hit
 		if (table.find(access_history[i]) != table.end())
 			hit++;
+
 		//page not in table, find the optimal victim and insert it
 		else
 		{
 			miss++;
-			//find page currently in table that is next accessed furthest
-			//in the future
+			
+			//empty space in table, insert
+			if ((int)table.size() < limit)
+			{
+				table.insert(access_history[i]);
+				continue;
+			}
+			
+			//full table: replace page currently in table that is next 
+			//accessed furthest in the future
 			int far = -5;
 			int far_page;
 			for (auto pg = table.begin(); pg != table.end(); pg++)	//loop table
@@ -71,4 +80,6 @@ void OPTcache::optimalSim()
 			table.insert(access_history[i]);
 		}
 	}
+	
+	setCounts(hit, miss);
 }
