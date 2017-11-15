@@ -107,8 +107,8 @@ void MLQcache::updateHit(int page)
 	}
 	if(minPrivValue != -1 && maxUnprivValue != -1 && minPrivValue < maxUnprivValue)
 	{
-		cacheLocation[minPrivValue].first = false;
-		cacheLocation[minPrivValue].second = 0;
+		cacheLocation[minPrivPage].first = false;
+		cacheLocation[minPrivPage].second = 0;
 		cacheLocation[maxUnprivPage].first = true;
 		cacheLocation[maxUnprivPage].second = 1;
 	}
