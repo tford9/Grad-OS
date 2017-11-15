@@ -52,7 +52,7 @@ void MLQcache::updateMiss(int page)
 		cacheLocation[page].second = 0;
 		++privCount; //have one more in privilege
 	}
-	//unprivilege is not full, but privilege is full
+	//unprivilege is not full
 	else
 	{
 		table.insert(page);
@@ -61,6 +61,7 @@ void MLQcache::updateMiss(int page)
 		++unprivCount;
 	}
 
+	//if there is a miss, decrement all privilege frequency by one (unless it is 0)
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
 		if((i->second).first == true && (i->second).second > 0)
@@ -83,6 +84,7 @@ void MLQcache::updateHit(int page)
 
 	int secondMaxUnprivValue = -1;
 
+	//find the min in priv and max in unpriv
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
 		if(((i->second).first == true) && ((minPrivValue == -1) || (i->second).second < minPrivValue))
@@ -97,6 +99,9 @@ void MLQcache::updateHit(int page)
 			maxUnprivPage = i->first;
 		}
 	}
+
+	//if minPriv < maxUnpriv, swap the two
+	//choose to make the frequency of the new page in unPriv to 
 	if(minPrivValue != -1 && maxUnprivValue != -1 && minPrivValue < maxUnprivValue)
 	{
 		cacheLocation[minPrivPage].first = false;
