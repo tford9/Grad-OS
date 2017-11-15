@@ -7,7 +7,7 @@ from sys import argv, exit
 
 TravAlgs = [1,2];
 DatForms = [1];
-ReplPol= [1,2,3];
+ReplPol= [1,2,3,4,5,6,7];
 
 CacheSizesKB = np.arange(8,13,1);
 
@@ -22,7 +22,7 @@ output_file = open('output_{}.txt'.format(argv[1]), 'w')
 for cs in CacheSizesKB :
     string = "";
     string += str(2**cs) + '\n';
-    PageSizesKB = np.arange(cs-7,cs-3);
+    PageSizesKB = np.arange(2,cs-1);
     for ps in PageSizesKB:
         string1="";
         string1 +=string + str(2**ps) + '\n';
