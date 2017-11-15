@@ -104,7 +104,7 @@ int main()
 		cache = new LIFOcache(cacheSize, pageSize);
 	else if (policy == RR)
 		cache = new RRcache(cacheSize, pageSize);
-	else if (policy == MRU)
+	else if (policy == MLQ)
 		cache = new MLQcache(cacheSize, pageSize);
 	else //if policy == OPT)		//use an else to prevent initialization warnings
 		cache = new OPTcache(cacheSize, pageSize);

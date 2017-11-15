@@ -2,7 +2,6 @@
 #define MLQ_CACHE
 
 #include <unordered_map>
-#include <vector>
 #include <utility>
 #include <cmath>
 #include <iostream>

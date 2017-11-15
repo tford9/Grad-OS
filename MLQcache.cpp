@@ -1,4 +1,3 @@
-#include <vector>
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -6,11 +5,9 @@
 #include "cacheBase.h"
 #include "MLQcache.h"
 
-//QUESTION: When should we demote from pivilege to unprivilege
-
 using namespace std;
 
-MLQcache::MLQcache(int cacheSize, int pageSize) : Cache(cacheSize, pageSize) {}
+MLQcache::MLQcache(int cacheSize, int pageSize) : Cache(cacheSize, pageSize) { }
 
 void MLQcache::updateMiss(int page)
 {
@@ -19,9 +16,6 @@ void MLQcache::updateMiss(int page)
 
 	int maxUnprivValue = -1;
 	int maxUnprivPage;
-
-	cerr << "MAX UNPRIV: " << maxUnpriv;
-	cerr << "MAX PRIV: "  << maxPriv;
 
 	//both caches are full - evict from unprivilege cache and add new page to it
 	if (unprivCount == maxUnpriv && privCount == maxPriv)
@@ -39,7 +33,6 @@ void MLQcache::updateMiss(int page)
 		cacheLocation.erase(minUnprivPage);
 		cacheLocation[page].first = false;
 		cacheLocation[page].second = 0;
-		cerr << "BOTH FULL";
 	}
 	//unprivilege is full, privilege is not - promote to privilege and then add to unprivilege
 	else if(unprivCount == maxUnpriv && privCount < maxPriv)
@@ -58,7 +51,6 @@ void MLQcache::updateMiss(int page)
 		cacheLocation[page].first = false;
 		cacheLocation[page].second = 0;
 		++privCount; //have one more in privilege
-		cerr << "UNPRIV FULL | PRIV NOT FULL";
 	}
 	//unprivilege is not full, but privilege is full
 	else
@@ -67,7 +59,6 @@ void MLQcache::updateMiss(int page)
 		cacheLocation[page].first = false;
 		cacheLocation[page].second = 0;
 		++unprivCount;
-		cerr << "UNPRIV NOT FULL";
 	}
 
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
@@ -75,16 +66,14 @@ void MLQcache::updateMiss(int page)
 		if((i->second).first == true && (i->second).second > 0)
 		{
 			(i->second).second -= 1;
-			cerr << "DECREMENT";
 		}
 	}
+	return;
 }
 
 void MLQcache::updateHit(int page)
 {
 	(cacheLocation[page].second) += 1;
-	
-	cerr << "UPDATE HIT!!!";
 
 	int minPrivValue = -1;
 	int minPrivPage;
@@ -92,15 +81,18 @@ void MLQcache::updateHit(int page)
 	int maxUnprivValue = -1;
 	int maxUnprivPage;
 
+	int secondMaxUnprivValue = -1;
+
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
-		if(((i->second).first == true) || ((minPrivValue == -1) && (i->second).second > minPrivValue))
+		if(((i->second).first == true) && ((minPrivValue == -1) || (i->second).second < minPrivValue))
 		{
 			minPrivValue = (i->second).second;
 			minPrivPage = i->first;
 		}
-		if(((i->second).first == false) || ((maxUnprivValue == -1) && (i->second).second < maxUnprivValue))
+		if(((i->second).first == false) && ((maxUnprivValue == -1) || (i->second).second > maxUnprivValue))
 		{
+			secondMaxUnprivValue = maxUnprivValue;
 			maxUnprivValue = (i->second).second;
 			maxUnprivPage = i->first;
 		}
@@ -108,7 +100,7 @@ void MLQcache::updateHit(int page)
 	if(minPrivValue != -1 && maxUnprivValue != -1 && minPrivValue < maxUnprivValue)
 	{
 		cacheLocation[minPrivPage].first = false;
-		cacheLocation[minPrivPage].second = 0;
+		cacheLocation[minPrivPage].second = secondMaxUnprivValue + 1;
 		cacheLocation[maxUnprivPage].first = true;
 		cacheLocation[maxUnprivPage].second = 1;
 	}
