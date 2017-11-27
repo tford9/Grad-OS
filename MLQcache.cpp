@@ -81,7 +81,12 @@ void MLQcache::updateMiss(int page)
 
 void MLQcache::updateHit(int page)
 {
+	//increment hit counter
 	(cacheLocation[page].second) += 1;
+	
+	//in upper level, quit
+	if (cacheLocation[page].first == true)
+		return;
 
 	int minPrivValue = -1;
 	int minPrivPage;
@@ -107,8 +112,16 @@ void MLQcache::updateHit(int page)
 	//if minPriv < maxUnpriv, swap the two
 	//choose to make the frequency of the new page in unPriv to 
 	if(minPrivValue != -1 && maxUnprivValue != -1 && minPrivValue < maxUnprivValue)
-	{
-		cacheLocation[minPrivPage].first = false;
-		cacheLocation[maxUnprivPage].first = true;
+	{		
+		cacheLocation[maxUnprivPage].first = true;	//always promote
+		//if upper level full, do a demotion
+		if (privCount == maxPriv)
+			cacheLocation[minPrivPage].first = false;
+		//not full, update counts
+		else
+		{
+			privCount++;
+			unprivCount--;
+		}
 	}
 }
