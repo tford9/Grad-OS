@@ -63,10 +63,19 @@ void MLQcache::updateMiss(int page)
 		++unprivCount;
 	}
 	
+	if (privCount != maxPriv || unprivCount != maxUnpriv)
+	{
+		return;
+	}
+
 	//if there is a miss, decrement all privilege frequency by one (unless it is 0)
 	//age the unpriv 2x as much as the priv	
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
+		if((i->first) == page)
+		{
+			continue;
+		}
 		//upper level - decrement 1
 		if ((i->second).first == true)
 			(i->second).second -= 1;
