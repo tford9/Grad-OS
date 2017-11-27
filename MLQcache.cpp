@@ -67,14 +67,15 @@ void MLQcache::updateMiss(int page)
 	//age the unpriv 2x as much as the priv
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
-		if((i->second).first == true && (i->second).second > 0)
-		{
+		//upper level - decrement 1
+		if ((i->second).first == true))
 			(i->second).second -= 1;
-		}
-		if((i->second).first == false && (i->second).second > 1)
-		{
+		//decrement lower by 2
+		if((i->second).first == false))
 			(i->second).second -= 2;
-		}
+		//cap to min of 0
+		if ((i->second).second < 0)
+			(i->second).second = 0;
 	}
 	return;
 }
