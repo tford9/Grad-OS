@@ -22,7 +22,8 @@ void MLQcache::updateMiss(int page)
 	{
 		for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 		{
-			if(((i->second).first == false && minUnprivValue == -1) || ((i->second).first == false && (i->second).second < minUnprivValue))
+			if(((i->second).first == false && minUnprivValue == -1) || 
+				((i->second).first == false && (i->second).second < minUnprivValue))
 			{
 				minUnprivPage = i->first;
 				minUnprivValue = (i->second).second;
@@ -32,7 +33,7 @@ void MLQcache::updateMiss(int page)
 		table.insert(page);
 		cacheLocation.erase(minUnprivPage);
 		cacheLocation[page].first = false;
-		cacheLocation[page].second = 0;
+		cacheLocation[page].second = 1;
 	}
 	//unprivilege is full, privilege is not - promote to privilege and then add to unprivilege
 	else if(unprivCount == maxUnpriv && privCount < maxPriv)
@@ -40,7 +41,8 @@ void MLQcache::updateMiss(int page)
 		//iterate from end to begin - find max unprivilege page - promote
 		for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 		{
-			if(((i->second).first == false && maxUnprivValue == -1) || ((i->second).first == false && (i->second).second > maxUnprivValue))
+			if(((i->second).first == false && maxUnprivValue == -1) || 
+				((i->second).first == false && (i->second).second > maxUnprivValue))
 			{
 				maxUnprivPage = i->first;
 				maxUnprivValue = (i->second).second;
@@ -49,7 +51,7 @@ void MLQcache::updateMiss(int page)
 		cacheLocation[maxUnprivPage].first = true; //promote
 		table.insert(page);
 		cacheLocation[page].first = false;
-		cacheLocation[page].second = 0;
+		cacheLocation[page].second = 1;
 		++privCount; //have one more in privilege
 	}
 	//unprivilege is not full
@@ -57,16 +59,21 @@ void MLQcache::updateMiss(int page)
 	{
 		table.insert(page);
 		cacheLocation[page].first = false;
-		cacheLocation[page].second = 0;
+		cacheLocation[page].second = 1;
 		++unprivCount;
 	}
 
 	//if there is a miss, decrement all privilege frequency by one (unless it is 0)
+	//age the unpriv 2x as much as the priv
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
 		if((i->second).first == true && (i->second).second > 0)
 		{
 			(i->second).second -= 1;
+		}
+		if((i->second).first == false && (i->second).second > 1)
+		{
+			(i->second).second -= 2;
 		}
 	}
 	return;
@@ -82,8 +89,6 @@ void MLQcache::updateHit(int page)
 	int maxUnprivValue = -1;
 	int maxUnprivPage;
 
-	int secondMaxUnprivValue = -1;
-
 	//find the min in priv and max in unpriv
 	for(auto i = cacheLocation.begin(); i != cacheLocation.end(); ++i)
 	{
@@ -94,7 +99,6 @@ void MLQcache::updateHit(int page)
 		}
 		if(((i->second).first == false) && ((maxUnprivValue == -1) || (i->second).second > maxUnprivValue))
 		{
-			secondMaxUnprivValue = maxUnprivValue;
 			maxUnprivValue = (i->second).second;
 			maxUnprivPage = i->first;
 		}
@@ -105,8 +109,6 @@ void MLQcache::updateHit(int page)
 	if(minPrivValue != -1 && maxUnprivValue != -1 && minPrivValue < maxUnprivValue)
 	{
 		cacheLocation[minPrivPage].first = false;
-		cacheLocation[minPrivPage].second = secondMaxUnprivValue + 1;
 		cacheLocation[maxUnprivPage].first = true;
-		cacheLocation[maxUnprivPage].second = 1;
 	}
 }
