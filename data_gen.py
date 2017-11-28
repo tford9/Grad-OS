@@ -6,8 +6,8 @@ from subprocess import Popen, PIPE, STDOUT
 from sys import argv, exit  
 
 TravAlgs = [1,2];
-DatForms = [1];
-ReplPol= [1,2,3,4,5,6,7,8];
+DatForms = [1,2,3];
+ReplPol= [8];
 
 CacheSizesKB = np.arange(8,13,1);
 
