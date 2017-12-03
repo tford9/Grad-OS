@@ -1,4 +1,4 @@
-CFLAGS=-std=c++11 -Wall -O -g
+CFLAGS=-std=c++11 -Wall -O -O3 -g
 CC=g++ 
 
 BASECLASSOBJS=travBase.o cacheBase.o graphBase.o
