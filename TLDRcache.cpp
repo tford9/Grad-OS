@@ -3,13 +3,13 @@
 #include <iostream>
 
 #include "cacheBase.h"
-#include "MLQcache.h"
+#include "TLDRcache.h"
 
 using namespace std;
 
-MLQcache::MLQcache(int cacheSize, int pageSize) : Cache(cacheSize, pageSize) { }
+TLDRcache::TLDRcache(int cacheSize, int pageSize) : Cache(cacheSize, pageSize) { }
 
-void MLQcache::updateMiss(int page)
+void TLDRcache::updateMiss(int page)
 {
 	int minUnprivValue = -1;
 	int minUnprivPage;
@@ -89,7 +89,7 @@ void MLQcache::updateMiss(int page)
 	return;
 }
 
-void MLQcache::updateHit(int page)
+void TLDRcache::updateHit(int page)
 {
 	//increment hit counter
 	(cacheLocation[page].second) += 1;

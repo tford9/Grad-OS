@@ -1,5 +1,5 @@
-#ifndef MLQ_CACHE
-#define MLQ_CACHE
+#ifndef TLDR_CACHE
+#define TLDR_CACHE
 
 #include <unordered_map>
 #include <utility>
@@ -10,10 +10,10 @@
 
 using namespace std;
 
-class MLQcache : public Cache 
+class TLDRcache : public Cache 
 {
 	public:
-		MLQcache(int cacheSize, int pageSize);
+		TLDRcache(int cacheSize, int pageSize);
 	
 		virtual void updateMiss(int page);
 
