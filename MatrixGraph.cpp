@@ -45,7 +45,9 @@ bool MatrixGraph::loadFromFile(string filename)
 		//and loop edges
 		for (auto tt = it->second.begin(); tt != it->second.end(); tt++)
 		{
+			//undirected, put in edge both ways
 			graph[it->first*n + *tt] = 1;
+			graph[(*tt)*n + it->first] = 1;
 		}
 	}	
 	
