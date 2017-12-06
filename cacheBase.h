@@ -10,7 +10,7 @@ class Cache
 {
 	private:
 		int size, page;		//size of cache and pages
-		int hit, miss;		//number of cache hits and misses
+		unsigned long long hit, miss;		//number of cache hits and misses
 		int n;				//number of pages
 		map<unsigned long, int> pageBoundary;	//key - starting address of page
 													//value - page number
