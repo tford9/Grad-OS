@@ -34,22 +34,14 @@ void BFStrav::runTraversal(int source)
 
 void DFStrav::runTraversal(int source)
 {
-    s.push(source);
+   	if (Traverse::visited[source] == true)
+   		return;
+   		
     Traverse::visited[source] = true;
-    while (s.size() != 0)
+    for (int v = Traverse::graph->getNextNeighbor(source); v != -1; v = Traverse::graph->getNextNeighbor(source))
     {
-        int u = s.top();
-        s.pop();
-        while (true)
-        {
-            int v = Traverse::graph -> getNextNeighbor(u);
-            if (v == -1) // the sentinel value which indicates the end of neighbors
-                break;
-            if (not Traverse::visited[v])
-            {
-                Traverse::visited[v] = true;
-                s.push(v);
-            }
-        }
+    	if (Traverse::visited[v] == false)
+    		runTraversal(v);
     }
+    return;
 }
