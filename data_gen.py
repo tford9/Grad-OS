@@ -5,9 +5,9 @@ import numpy as np
 from subprocess import Popen, PIPE, STDOUT
 from sys import argv, exit  
 
-TravAlgs = [1,2];
-DatForms = [1,2,3];
-ReplPol= [1,2,3,4,5,6,7,8];
+TravAlgs = [2];
+DatForms = [1];
+ReplPol= [4];
 
 CacheSizesKB = np.arange(8,13,1);
 
@@ -23,6 +23,7 @@ for cs in CacheSizesKB :
     string = "";
     string += str(2**cs) + '\n';
     PageSizesKB = np.arange(2,cs-1);
+    PageSizesKB = [5];
     for ps in PageSizesKB:
         string1="";
         string1 +=string + str(2**ps) + '\n';
